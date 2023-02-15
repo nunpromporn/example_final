@@ -31,4 +31,17 @@ func TestValidationVideO(t *testing.T) {
 
 	})
 
+	t.Run("check Url", func(t *testing.T) {
+
+		v := Video{
+			Name: "Nun",
+			Url:  "1",
+		}
+		ok, err := govalidator.ValidateStruct(v)
+		g.Expect(ok).NotTo(BeTrue())
+		g.Expect(err).NotTo(BeNil())
+		g.Expect(err.Error()).To(Equal("Url: 1 does not validate as url"))
+
+	})
+
 }
